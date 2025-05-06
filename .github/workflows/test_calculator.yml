@@ -1,0 +1,30 @@
+name: Run Tests and Upload Artifact #nombre opcional pero se recomienda ponerlo
+
+#cuando se realicen estas acciones
+on: [push, pull_request]
+
+jobs:
+  test:  #nombre del job
+    #cada run se ejecuta en un vm o en equipo local 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        #marketplace de actions (repositorios de código)
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4  #ejecuta nodejs
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests and generate report
+        run: node test/calculator.test.js
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4  #subir un archivo/crear un artefacto
+        with:
+          name: test-results
+          path: results/test-results.txt
