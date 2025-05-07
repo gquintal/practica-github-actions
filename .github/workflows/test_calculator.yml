@@ -1,7 +1,7 @@
 name: Run Tests and Upload Artifact #nombre opcional pero se recomienda ponerlo
 
 #cuando se realicen estas acciones
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   test:  #nombre del job
